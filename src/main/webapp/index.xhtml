@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>weblab_3</title>
+
+    <h:outputStylesheet name="css/style.css"/>
+
+</h:head>
+
+
+<h:body>
+    <header>
+        <h1>Egor Vereshchagin, P32312</h1>
+        <h2>var. 6663121</h2>
+
+    </header>
+    <main>
+        <div class="rainbow-box">
+            <div class="card">
+                <div id="graph-back"></div>
+                <canvas id="graph" width="350" height="350"></canvas>
+            </div>
+        </div>
+        <h:form id="form">
+            <p class="variable_name">X</p>
+            <p:inputText type='hidden' value="#{attemptBean.x}" name='x' id='x'/>
+            <div id="xButtons">
+                <h:commandButton name="xButton" type="button" id="button1" class="button"
+                                 value="-2" onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button2" class="button"
+                                 value="-1.5"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button3" class="button"
+                                 value="-1"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button4" class="button"
+                                 value="-0.5"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button5" class="button"
+                                 value="0"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button6" class="button"
+                                 value="0.5"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button7" class="button"
+                                 value="1"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button8" class="button"
+                                 value="1.5"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="button9" class="button"
+                                 value="2"
+                                 onclick="changeClassToEnabledX(this.id)"/>
+            </div>
+
+            <p class="variable_name">Y</p>
+            <p:inputNumber
+                    minValue="-3"
+                    maxValue="3"
+                    decimalPlaces="10"
+                    type="text"
+                    decimalSeparator="."
+                    name="y" id="yInput" maxlength="10" value="#{attemptBean.y}"/>
+
+            <p id="y-warning" class="warning"></p>
+
+
+            <p class="variable_name">R</p>
+
+            <p:inputText type='hidden' value="#{attemptBean.r}" name='r' id='r'/>
+            <div id="rButtons">
+                <h:commandButton name="rButton" type="button" id="buttonR1" class="button"
+                                 value="1" onclick="changeClassToEnabledR(this.id)"/>
+                <h:commandButton name="rButton" type="button" id="buttonR2" class="button"
+                                 value="2" onclick="changeClassToEnabledR(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="buttonR3" class="button"
+                                 value="3" onclick="changeClassToEnabledR(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="buttonR4" class="button"
+                                 value="4" onclick="changeClassToEnabledR(this.id)"/>
+                <h:commandButton name="xButton" type="button" id="buttonR5" class="button"
+                                 value="5" onclick="changeClassToEnabledR(this.id)"/>
+            </div>
+
+
+            <h1>Results</h1>
+            <table>
+                <tr>
+                    <td>Attempt</td>
+                    <td>X</td>
+                    <td>Y</td>
+                    <td>R</td>
+                    <td>Result</td>
+                    <td>Work time(in microseconds)</td>
+                    <td>Start time</td>
+                </tr>
+
+            </table>
+
+            <div>
+                <h:commandButton id="submit" class="button" value="Send" action="#{attemptBean.addAttempt}"/>
+            </div>
+        </h:form>
+    </main>
+
+    <h:outputScript name="js/grapher.js"/>
+
+
+    <script type="text/javascript">
+        function changeClassToEnabledX(id) {
+
+            let cl = document.getElementById("xButtons").getElementsByClassName('button-enabled')
+            let len = cl.length
+
+            for (let index = 0; index != len; ++index) {
+                cl[index].className = 'button'
+            }
+            document.getElementById(id).className = "button-enabled"
+            document.getElementById('form:x').value = document.getElementById(id).value
+        }
+
+        function changeClassToEnabledR(id) {
+            let cl = document.getElementById("rButtons").getElementsByClassName('button-enabled')
+            let len = cl.length
+
+            for (let index = 0; index != len; ++index) {
+                cl[index].className = 'button'
+            }
+            document.getElementById(id).className = "button-enabled"
+            document.getElementById('form:r').value = document.getElementById(id).value
+
+        }
+    </script>
+</h:body>
+
+</html>
