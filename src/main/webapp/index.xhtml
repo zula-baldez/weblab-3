@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>weblab_3</title>
@@ -25,7 +25,7 @@
         </div>
         <h:form id="form">
             <p class="variable_name">X</p>
-            <p:inputText type='hidden' value="#{attemptBean.x}" name='x' id='x'/>
+            <p:inputText type='hidden' value="#{attempt.x}" name='x' id='x'/>
             <div id="xButtons">
                 <h:commandButton name="xButton" type="button" id="button1" class="button"
                                  value="-2" onclick="changeClassToEnabledX(this.id)"/>
@@ -62,14 +62,14 @@
                     decimalPlaces="10"
                     type="text"
                     decimalSeparator="."
-                    name="y" id="yInput" maxlength="10" value="#{attemptBean.y}"/>
+                    name="y" id="yInput" maxlength="10" value="#{attempt.y}"/>
 
             <p id="y-warning" class="warning"></p>
 
 
             <p class="variable_name">R</p>
 
-            <p:inputText type='hidden' value="#{attemptBean.r}" name='r' id='r'/>
+            <p:inputText type='hidden' value="#{attempt.r}" name='r' id='r'/>
             <div id="rButtons">
                 <h:commandButton name="rButton" type="button" id="buttonR1" class="button"
                                  value="1" onclick="changeClassToEnabledR(this.id)"/>
@@ -85,7 +85,8 @@
 
 
             <h1>Results</h1>
-            <table>
+
+            <h:dataTable value="#{dbManager.attempts}" var="a">
                 <tr>
                     <td>Attempt</td>
                     <td>X</td>
@@ -95,11 +96,39 @@
                     <td>Work time(in microseconds)</td>
                     <td>Start time</td>
                 </tr>
+                <h:column>
+                    <f:facet name="header">attempt</f:facet>
+                    <h:outputText value="#{a.attempt}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    <h:outputText value="#{a.x}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    <h:outputText value="#{a.y}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    <h:outputText value="#{a.r}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Result</f:facet>
+                    <h:outputText value="#{a.hit}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Start time</f:facet>
+                    <h:outputText value="#{a.startTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">work time</f:facet>
+                    <h:outputText value="#{a.workTime}"/>
+                </h:column>
+            </h:dataTable>
 
-            </table>
 
             <div>
-                <h:commandButton id="submit" class="button" value="Send" action="#{attemptBean.addAttempt}"/>
+                <h:commandButton id="submit" class="button" value="Send" action="#{dbManager.addAttempt(attempt)}"/>
             </div>
         </h:form>
     </main>
