@@ -20,7 +20,6 @@ public class DbManager {
     private String getString = "From Attempt ";
 
     public void addAttempt(Attempt attemptBean) {
-        System.out.println("POCHEMU");
         id++;
         attemptBean.checkHit();
         attemptBean.setAttempt(id);
