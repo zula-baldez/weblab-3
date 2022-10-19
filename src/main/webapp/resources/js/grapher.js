@@ -130,7 +130,7 @@ function drawFigure() {
 
 }
 
-function drawDots(x, y, r) {
+function drawDots(x, y, r, hit) {
     drawGraph()
     let realR = 5
     if (r.length !== 0) {
@@ -141,14 +141,18 @@ function drawDots(x, y, r) {
         realR = rData.value
     }
 
-    ctx.fillStyle = '#000'
     for (let i = 0; i < x.length; i++) {
+
         let realX = width / 2 + x[i] / (realR * 3 / 2) * width / 2
         let realY = height / 2 - y[i] / (realR * 3 / 2) * height / 2
+        if(hit[i])  ctx.fillStyle = '#0F0'
+        else ctx.fillStyle = '#F00'
+        ctx.beginPath()
         ctx.moveTo(realX, realY)
         ctx.arc(realX, realY, 5, 0, Math.PI * 2)
         ctx.fill()
     }
+    ctx.fillStyle = '#000'
 }
 
 
@@ -170,7 +174,9 @@ canvas.onmousedown = (e) => {
     xInp.value = x
 
     yInp.value = y.toFixed(10)
+    document.getElementById("form:submit").disabled = false
     document.getElementById("form:submit").click()
+    document.getElementById("form").reset()
 }
 
 

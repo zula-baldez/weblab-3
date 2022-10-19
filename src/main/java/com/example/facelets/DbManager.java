@@ -20,6 +20,7 @@ public class DbManager {
     private String getString = "From Attempt ";
 
     public void addAttempt(Attempt attemptBean) {
+        System.out.println("POCHEMU");
         id++;
         attemptBean.checkHit();
         attemptBean.setAttempt(id);
@@ -44,6 +45,9 @@ public class DbManager {
 
     public String getR() {
         return new Gson().toJson(getAttempts().stream().map(Attempt::getR).collect(Collectors.toList()));
+    }
+    public String getHit() {
+        return new Gson().toJson(getAttempts().stream().map(Attempt::isHit).collect(Collectors.toList()));
     }
 
 

@@ -137,7 +137,9 @@
             let x = JSON.parse('#{dbManager.x}')
             let y = JSON.parse('#{dbManager.y}')
             let r = JSON.parse('#{dbManager.r}')
-            drawDots(x, y, r)
+            let hit = JSON.parse('#{dbManager.hit}')
+
+            drawDots(x, y, r, hit)
         }
         drawDot()
     </script>

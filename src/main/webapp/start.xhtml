@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>weblab_3</title>
+
+    <h:outputStylesheet name="css/style.css"/>
+
+</h:head>
+
+
+<h:body>
+    <header>
+        <h1>Egor Vereshchagin, P32312</h1>
+        <h2>var. 66634</h2>
+
+    </header>
+    <main>
+
+        <div class="clock">
+                <span id="hour"/>
+                <span id="minute"/>
+                <span id="second"/>
+        </div>
+        <div class="analog-clock">
+            <canvas id = "clock-canvas" width="500" height="500">
+
+            </canvas>
+        </div>
+        <h:button class = "button" type = "button" value="Go!">
+
+        </h:button>
+    </main>
+    <script src = "./resources/js/clock.js"></script>
+
+</h:body>
+
+</html>

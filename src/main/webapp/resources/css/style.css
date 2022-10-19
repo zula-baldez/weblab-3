@@ -142,3 +142,8 @@ header:hover h2::after {
         transform: rotate(360deg);
     }
 }
+.clock {
+    text-align: center;
+    font-size: 40px;
+
+}
