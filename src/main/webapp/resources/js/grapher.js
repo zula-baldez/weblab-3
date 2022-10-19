@@ -131,15 +131,16 @@ function drawFigure() {
 }
 
 function drawDots(x, y, r) {
+    drawGraph()
     let realR = 5
     if (r.length !== 0) {
         realR = r[r.length - 1]
     }
-    let form = document.getElementById('form')
-    let formData = new FormData(form)
-    if (formData.has('r')) {
-        realR = formData.get('r')
+    let rData = document.getElementById("form:r")
+    if(rData != null && rData.value != null && rData.value !== 0) {
+        realR = rData.value
     }
+
     ctx.fillStyle = '#000'
     for (let i = 0; i < x.length; i++) {
         let realX = width / 2 + x[i] / (realR * 3 / 2) * width / 2
@@ -154,11 +155,9 @@ function drawDots(x, y, r) {
 canvas.onmousedown = (e) => {
 
 
-    let xInp = document.getElementById('x')
-
-    let yInp = document.getElementById('y')
-
-    let rInp = document.getElementById('r')
+    let xInp = document.getElementById('form:x')
+    let yInp = document.getElementById('form:y')
+    let rInp = document.getElementById('form:r')
 
     if (rInp.value == null || rInp.value === 0) {
         alert('First enter R')
@@ -168,10 +167,10 @@ canvas.onmousedown = (e) => {
     }
     let x = (e.offsetX / width) * (3 * r) - (3 / 2) * r;
     let y = ((3 * r / 2 - (e.offsetY / height * (3 * r))) * 10) / 10;
-
     xInp.value = x
-    yInp.value = y
-    document.getElementById("submit").click()
+
+    yInp.value = y.toFixed(10)
+    document.getElementById("form:submit").click()
 }
 
 

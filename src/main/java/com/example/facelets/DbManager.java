@@ -1,5 +1,6 @@
 package com.example.facelets;
 
+import com.google.gson.Gson;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @ManagedBean
@@ -32,6 +34,18 @@ public class DbManager {
             return session.createQuery(getString).list();
         }
     }
+    public String getX() {
+        return new Gson().toJson(getAttempts().stream().map(Attempt::getX).collect(Collectors.toList()));
+    }
+
+    public String getY() {
+        return new Gson().toJson(getAttempts().stream().map(Attempt::getY).collect(Collectors.toList()));
+    }
+
+    public String getR() {
+        return new Gson().toJson(getAttempts().stream().map(Attempt::getR).collect(Collectors.toList()));
+    }
+
 
 
 }

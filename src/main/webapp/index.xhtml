@@ -13,7 +13,7 @@
 <h:body>
     <header>
         <h1>Egor Vereshchagin, P32312</h1>
-        <h2>var. 6663121</h2>
+        <h2>var. 66634</h2>
 
     </header>
     <main>
@@ -56,13 +56,8 @@
             </div>
 
             <p class="variable_name">Y</p>
-            <p:inputNumber
-                    minValue="-3"
-                    maxValue="3"
-                    decimalPlaces="10"
-                    type="text"
-                    decimalSeparator="."
-                    name="y" id="yInput" maxlength="10" value="#{attempt.y}"/>
+            <p:inputText
+                    name="y" id="y" maxlength="10" value="#{attempt.y}"/>
 
             <p id="y-warning" class="warning"></p>
 
@@ -82,7 +77,6 @@
                 <h:commandButton name="xButton" type="button" id="buttonR5" class="button"
                                  value="5" onclick="changeClassToEnabledR(this.id)"/>
             </div>
-
 
             <h1>Results</h1>
 
@@ -128,17 +122,27 @@
 
 
             <div>
+
                 <h:commandButton id="submit" class="button" value="Send" action="#{dbManager.addAttempt(attempt)}"/>
+
             </div>
         </h:form>
     </main>
-
     <h:outputScript name="js/grapher.js"/>
+    <h:outputScript name="js/validator.js"/>
 
 
+    <script>
+        function drawDot() {
+            let x = JSON.parse('#{dbManager.x}')
+            let y = JSON.parse('#{dbManager.y}')
+            let r = JSON.parse('#{dbManager.r}')
+            drawDots(x, y, r)
+        }
+        drawDot()
+    </script>
     <script type="text/javascript">
         function changeClassToEnabledX(id) {
-
             let cl = document.getElementById("xButtons").getElementsByClassName('button-enabled')
             let len = cl.length
 
@@ -158,7 +162,7 @@
             }
             document.getElementById(id).className = "button-enabled"
             document.getElementById('form:r').value = document.getElementById(id).value
-
+            drawDot()
         }
     </script>
 </h:body>
