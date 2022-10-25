@@ -14,13 +14,13 @@
     <header>
         <h1>Egor Vereshchagin, P32312</h1>
         <h2>var. 66634</h2>
-
     </header>
     <main>
         <div class="rainbow-box">
             <div class="card">
                 <div id="graph-back"></div>
-                <canvas id="graph" width="350" height="350"></canvas>
+                <canvas id="graph" width="350" height="350">
+                </canvas>
             </div>
         </div>
         <h:form id="form">
@@ -80,7 +80,7 @@
 
             <h1>Results</h1>
 
-            <h:dataTable value="#{dbManager.attempts}" var="a">
+            <h:dataTable value="#{dbManager.attempts}" var="a" id="table">
                 <tr>
                     <td>Attempt</td>
                     <td>X</td>
@@ -121,34 +121,21 @@
             </h:dataTable>
 
 
-            <div>
+            <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt(attempt)}" update = "drawDot form"/>
 
-                <h:commandButton id="submit" class="button" value="Send" action="#{dbManager.addAttempt(attempt)}"/>
-                <h:commandButton id="go-start" class="button" value="go start" action="go-start"/>
+            <p:commandButton id="go-start" class="button" value="go start" action="#{navigationHandler.goStart}"/>
 
-            </div>
         </h:form>
     </main>
     <h:outputScript name="js/grapher.js"/>
     <h:outputScript name="js/validator.js"/>
 
 
-    <script>
-        function drawDot() {
-            let x = JSON.parse('#{dbManager.x}')
-            let y = JSON.parse('#{dbManager.y}')
-            let r = JSON.parse('#{dbManager.r}')
-            let hit = JSON.parse('#{dbManager.hit}')
 
-            drawDots(x, y, r, hit)
-        }
-        drawDot()
-    </script>
     <script type="text/javascript">
         function changeClassToEnabledX(id) {
             let cl = document.getElementById("xButtons").getElementsByClassName('button-enabled')
             let len = cl.length
-
             for (let index = 0; index != len; ++index) {
                 cl[index].className = 'button'
             }
@@ -168,6 +155,22 @@
             drawDot()
         }
     </script>
+    <script>
+
+    </script>
+    <h:panelGroup id="drawDot">
+        <h:outputScript>
+            function drawDot() {
+            let x = JSON.parse('#{dbManager.x}')
+            let y = JSON.parse('#{dbManager.y}')
+            let r = JSON.parse('#{dbManager.r}')
+            let hit = JSON.parse('#{dbManager.hit}')
+
+            drawDots(x, y, r, hit)
+            }
+            drawDot()
+        </h:outputScript>
+    </h:panelGroup>
 </h:body>
 
 </html>

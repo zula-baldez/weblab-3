@@ -17,9 +17,14 @@ public class DbManager {
     SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Attempt.class)
             .buildSessionFactory();
     private int id = 0;
-    private String getString = "From Attempt ";
-
+    private String getString = "From Attempt";
     public void addAttempt(Attempt attemptBean) {
+        System.out.println(attemptBean.getX());
+
+        System.out.println(attemptBean.getY());
+
+        System.out.println(attemptBean.getR());
+        if(attemptBean.getR() == 0) return;
         id++;
         attemptBean.checkHit();
         attemptBean.setAttempt(id);
@@ -27,10 +32,14 @@ public class DbManager {
         session.beginTransaction();
         session.save(attemptBean);
         session.getTransaction().commit();
+
+
+
     }
 
     public List<Attempt> getAttempts() {
         try (Session session = sessionFactory.openSession()) {
+
             return session.createQuery(getString).list();
         }
     }

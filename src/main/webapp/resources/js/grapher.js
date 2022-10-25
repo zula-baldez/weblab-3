@@ -137,9 +137,11 @@ function drawDots(x, y, r, hit) {
         realR = r[r.length - 1]
     }
     let rData = document.getElementById("form:r")
-    if(rData != null && rData.value != null && rData.value !== 0) {
+    if(rData != null && rData.value != null && rData.value > 0) {
         realR = rData.value
     }
+
+
 
     for (let i = 0; i < x.length; i++) {
 
@@ -162,13 +164,14 @@ canvas.onmousedown = (e) => {
     let xInp = document.getElementById('form:x')
     let yInp = document.getElementById('form:y')
     let rInp = document.getElementById('form:r')
-
+    let r = 5
     if (rInp.value == null || rInp.value === 0) {
         alert('First enter R')
         return
     } else {
-        var r = rInp.value
+        r = rInp.value
     }
+
     let x = (e.offsetX / width) * (3 * r) - (3 / 2) * r;
     let y = ((3 * r / 2 - (e.offsetY / height * (3 * r))) * 10) / 10;
     xInp.value = x

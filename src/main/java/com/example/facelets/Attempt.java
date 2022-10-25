@@ -3,7 +3,9 @@ package com.example.facelets;
 import jakarta.persistence.*;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
