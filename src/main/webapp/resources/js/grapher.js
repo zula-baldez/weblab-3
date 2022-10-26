@@ -174,12 +174,29 @@ canvas.onmousedown = (e) => {
 
     let x = (e.offsetX / width) * (3 * r) - (3 / 2) * r;
     let y = ((3 * r / 2 - (e.offsetY / height * (3 * r))) * 10) / 10;
-    xInp.value = x
+  /*  xInp.value = x
 
-    yInp.value = y.toFixed(10)
-    document.getElementById("form:submit").disabled = false
+    yInp.value = y.toFixed(10)*/
+/*    document.getElementById("form:submit").disabled = false
     document.getElementById("form:submit").click()
-    document.getElementById("form").reset()
+    document.getElementById("form").reset()*/
+
+    addAttempt(
+        [
+            {
+                name: "x",
+                value: x.toString()
+            },
+            {
+                name: "y",
+                value: y.toString()
+            },
+            {
+                name: "r",
+                value: r.toString()
+            }
+        ]
+    )
 
 }
 

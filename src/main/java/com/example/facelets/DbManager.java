@@ -8,9 +8,11 @@ import org.hibernate.cfg.Configuration;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -36,6 +38,24 @@ public class DbManager implements Serializable {
 
 
     }
+    public void addAttemptFromJsParams() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        try {
+            if(attempt.getR() == 0) return;
+            double x = Double.parseDouble(params.get("x"));
+            double y = Double.parseDouble(params.get("y"));
+            double r = attempt.getR();
+
+            attempt.setX(x);
+            attempt.setY(y);
+            attempt.checkHit();
+            addAttempt();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public List<Attempt> getAttempts() {
         try (Session session = sessionFactory.openSession()) {

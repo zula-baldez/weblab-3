@@ -56,8 +56,8 @@
             </div>
 
             <p class="variable_name">Y</p>
-            <p:inputText
-                    name="y" id="y" maxlength="10" value="#{attempt.y}"/>
+            <p:inputNumber
+                    name="y" id="y" minValue="-3" maxValue="3" decimalSeparator="." decimalPlaces="6"  value="#{attempt.y}"/>
 
             <p id="y-warning" class="warning"></p>
 
@@ -120,6 +120,7 @@
                 </h:column>
             </h:dataTable>
 
+            <p:remoteCommand name="addAttempt" update="table drawDot" action="#{dbManager.addAttemptFromJsParams}"/>
 
             <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt}" update = "drawDot form"/>
 
@@ -154,7 +155,6 @@
             drawDot()
         }
     </script>
-    <h:outputScript name="js/validator.js"/>
 
     <h:panelGroup id="drawDot">
 
