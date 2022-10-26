@@ -123,12 +123,11 @@
 
             <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt}" update = "drawDot form"/>
 
-            <p:commandButton id="go-start" class="button" value="go start" action="#{navigationHandler.goStart}"/>
+            <p:commandButton ajax="false" id="go-start" class="button" value="go start" action="start.xhtml?faces-redirect=true"/>
 
         </h:form>
     </main>
     <h:outputScript name="js/grapher.js"/>
-    <h:outputScript name="js/validator.js"/>
 
 
 
@@ -155,10 +154,10 @@
             drawDot()
         }
     </script>
-    <script>
+    <h:outputScript name="js/validator.js"/>
 
-    </script>
     <h:panelGroup id="drawDot">
+
         <h:outputScript>
             function drawDot() {
             let x = JSON.parse('#{dbManager.x}')

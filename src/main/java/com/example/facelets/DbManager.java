@@ -24,7 +24,6 @@ public class DbManager implements Serializable {
     @ManagedProperty(value = "#{attempt}")
     private Attempt attempt;
     public void addAttempt() {
-        System.out.println(attempt.getR());
         if(attempt.getR() == 0) return;
         id++;
         attempt.checkHit();

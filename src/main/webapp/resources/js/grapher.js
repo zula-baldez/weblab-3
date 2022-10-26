@@ -180,6 +180,7 @@ canvas.onmousedown = (e) => {
     document.getElementById("form:submit").disabled = false
     document.getElementById("form:submit").click()
     document.getElementById("form").reset()
+
 }
 
 

@@ -1,8 +1,8 @@
-const yInput = document.getElementById("form:y")
+let yInput = document.getElementById("form:y")
 
-const yElementWarning = document.getElementById("y-warning")
+let yElementWarning = document.getElementById("y-warning")
 
-const submitButton = document.getElementById("form:submit")
+let submitButton = document.getElementById("form:submit")
 
 function warning(elem, txt) {
     elem.innerHTML = txt;
