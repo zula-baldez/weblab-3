@@ -121,7 +121,7 @@
             </h:dataTable>
 
 
-            <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt(attempt)}" update = "drawDot form"/>
+            <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt}" update = "drawDot form"/>
 
             <p:commandButton id="go-start" class="button" value="go start" action="#{navigationHandler.goStart}"/>
 

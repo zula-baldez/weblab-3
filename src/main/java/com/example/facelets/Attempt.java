@@ -2,17 +2,24 @@ package com.example.facelets;
 
 import jakarta.persistence.*;
 
+
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Singleton;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-@ManagedBean
+@SessionScoped
+/*
+@Singleton
+*/
 @Entity
-public class Attempt {
+@ManagedBean
+public class Attempt implements Serializable {
     @Id
     private int attempt = 0;
     @Column

@@ -7,30 +7,37 @@ import org.hibernate.cfg.Configuration;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@ManagedBean
 @SessionScoped
-public class DbManager {
+@ManagedBean
+public class DbManager implements Serializable {
     SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Attempt.class)
             .buildSessionFactory();
     private int id = 0;
     private String getString = "From Attempt";
-    public void addAttempt(Attempt attemptBean) {
-        System.out.println(attemptBean.getX());
+/*
+    @Inject
+*/
+    private Attempt attempt;
+    public void addAttempt() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        attempt = (Attempt) facesContext.getApplication().createValueBinding("#{attempt}").getValue(facesContext);
 
-        System.out.println(attemptBean.getY());
-
-        System.out.println(attemptBean.getR());
-        if(attemptBean.getR() == 0) return;
+        System.out.println(attempt.getR());
+        if(attempt.getR() == 0) return;
         id++;
-        attemptBean.checkHit();
-        attemptBean.setAttempt(id);
+        attempt.checkHit();
+        attempt.setAttempt(id);
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.save(attemptBean);
+        session.save(attempt);
         session.getTransaction().commit();
 
 

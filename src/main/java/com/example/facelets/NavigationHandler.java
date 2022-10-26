@@ -1,9 +1,10 @@
 package com.example.facelets;
 
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 
 @ManagedBean
-public class NavigationHandler {
+public class NavigationHandler implements Serializable {
     public String goIndex() {
         return "go-index";
     }
