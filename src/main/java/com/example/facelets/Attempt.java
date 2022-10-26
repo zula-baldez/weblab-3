@@ -1,7 +1,8 @@
 package com.example.facelets;
 
-import jakarta.persistence.*;
 
+
+import jakarta.persistence.*;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -13,11 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-@SessionScoped
-/*
-@Singleton
-*/
+
 @Entity
+
+@SessionScoped
 @ManagedBean
 public class Attempt implements Serializable {
     @Id
@@ -100,7 +100,13 @@ public class Attempt implements Serializable {
         this.startTime = startTime;
     }
 
+    public SimpleDateFormat getSimpleDateFormat() {
+        return simpleDateFormat;
+    }
 
+    public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
+        this.simpleDateFormat = simpleDateFormat;
+    }
 
     public void checkHit() {
         long start = System.currentTimeMillis();

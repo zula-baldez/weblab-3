@@ -6,10 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,14 +21,9 @@ public class DbManager implements Serializable {
             .buildSessionFactory();
     private int id = 0;
     private String getString = "From Attempt";
-/*
-    @Inject
-*/
+    @ManagedProperty(value = "#{attempt}")
     private Attempt attempt;
     public void addAttempt() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        attempt = (Attempt) facesContext.getApplication().createValueBinding("#{attempt}").getValue(facesContext);
-
         System.out.println(attempt.getR());
         if(attempt.getR() == 0) return;
         id++;
@@ -65,6 +59,35 @@ public class DbManager implements Serializable {
         return new Gson().toJson(getAttempts().stream().map(Attempt::isHit).collect(Collectors.toList()));
     }
 
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getGetString() {
+        return getString;
+    }
+
+    public void setGetString(String getString) {
+        this.getString = getString;
+    }
+
+    public Attempt getAttempt() {
+        return attempt;
+    }
+
+    public void setAttempt(Attempt attempt) {
+        this.attempt = attempt;
+    }
 }
