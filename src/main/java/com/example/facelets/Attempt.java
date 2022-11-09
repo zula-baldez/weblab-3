@@ -16,7 +16,6 @@ import java.util.Objects;
 
 
 @Entity
-
 @SessionScoped
 @ManagedBean
 public class Attempt implements Serializable {
@@ -33,7 +32,7 @@ public class Attempt implements Serializable {
     @Column
     private Long workTime;
     @Column
-    private Date startTime;
+    private Long startTime;
     @Transient
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -92,11 +91,11 @@ public class Attempt implements Serializable {
         this.workTime = workTime;
     }
 
-    public Date getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
@@ -109,13 +108,15 @@ public class Attempt implements Serializable {
     }
 
     public void checkHit() {
+
         long start = System.currentTimeMillis();
+        long start_time_nano = System.nanoTime();
         if (x >= 0 && y <= r/2 - x && y >= 0) hit = true;
         else if (x >= 0 && y<=0 && y >= -r && x <= r/2) hit = true;
         else if (x<=0 && y >= 0 && x*x+y*y <= r*r) hit = true;
         else hit = false;
-        startTime = new Date(start);
-        workTime = ((System.currentTimeMillis() - start)/1000);
+        startTime = (start);
+        workTime = ((System.nanoTime() - start_time_nano));
 
     }
 

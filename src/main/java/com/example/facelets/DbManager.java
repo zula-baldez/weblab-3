@@ -45,7 +45,6 @@ public class DbManager implements Serializable {
             double x = Double.parseDouble(params.get("x"));
             double y = Double.parseDouble(params.get("y"));
             double r = attempt.getR();
-
             attempt.setX(x);
             attempt.setY(y);
             attempt.checkHit();

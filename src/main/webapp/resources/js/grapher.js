@@ -147,8 +147,12 @@ function drawDots(x, y, r, hit) {
 
         let realX = width / 2 + x[i] / (realR * 3 / 2) * width / 2
         let realY = height / 2 - y[i] / (realR * 3 / 2) * height / 2
-        if(hit[i])  ctx.fillStyle = '#0F0'
-        else ctx.fillStyle = '#F00'
+
+        if(hit[i] && realR == r[i])  ctx.fillStyle = '#0F0'
+        if(hit[i] && realR != r[i])  ctx.fillStyle = '#0A0'
+        if(!hit[i] && realR == r[i])  ctx.fillStyle = '#F00'
+        if(!hit[i] && realR != r[i])  ctx.fillStyle = '#A00'
+
         ctx.beginPath()
         ctx.moveTo(realX, realY)
         ctx.arc(realX, realY, 5, 0, Math.PI * 2)
@@ -174,12 +178,7 @@ canvas.onmousedown = (e) => {
 
     let x = (e.offsetX / width) * (3 * r) - (3 / 2) * r;
     let y = ((3 * r / 2 - (e.offsetY / height * (3 * r))) * 10) / 10;
-  /*  xInp.value = x
 
-    yInp.value = y.toFixed(10)*/
-/*    document.getElementById("form:submit").disabled = false
-    document.getElementById("form:submit").click()
-    document.getElementById("form").reset()*/
 
     addAttempt(
         [

@@ -14,5 +14,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <!--uvcchUbt69lYt8Sh-->
+        <!--KfvYuJQ8-->
     </session-factory>
 </hibernate-configuration>

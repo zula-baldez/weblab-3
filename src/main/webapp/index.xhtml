@@ -16,6 +16,7 @@
         <h2>var. 66634</h2>
     </header>
     <main>
+
         <div class="rainbow-box">
             <div class="card">
                 <div id="graph-back"></div>
@@ -24,6 +25,11 @@
             </div>
         </div>
         <h:form id="form">
+
+
+
+
+
             <p class="variable_name">X</p>
             <p:inputText type='hidden' value="#{attempt.x}" name='x' id='x'/>
             <div id="xButtons">
@@ -59,7 +65,6 @@
             <p:inputNumber
                     name="y" id="y" minValue="-3" maxValue="3" decimalSeparator="." decimalPlaces="6"  value="#{attempt.y}"/>
 
-            <p id="y-warning" class="warning"></p>
 
 
             <p class="variable_name">R</p>
@@ -79,7 +84,6 @@
             </div>
 
             <h1>Results</h1>
-
             <h:dataTable value="#{dbManager.attempts}" var="a" id="table">
                 <tr>
                     <td>Attempt</td>
@@ -112,7 +116,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Start time</f:facet>
-                    <h:outputText value="#{a.startTime}"/>
+                    <h:outputText value="#{a.startTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH.mm.ss" timeZone="#{timeZoner.timeZone}"/>
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">work time</f:facet>
@@ -126,10 +132,17 @@
 
             <p:commandButton ajax="false" id="go-start" class="button" value="go start" action="start.xhtml?faces-redirect=true"/>
 
+            <p:remoteCommand name="setTimezone" action="#{timeZoner.setTimeZone}" update="form"/>
+            <p:remoteCommand name="updateTimezone" update="form"/>
+
+
         </h:form>
     </main>
     <h:outputScript name="js/grapher.js"/>
-
+    <script type="text/javascript">
+        setTimezone([{name: "timezone", value: Intl.DateTimeFormat().resolvedOptions().timeZone}]);
+        updateTimezone()
+    </script>
 
 
     <script type="text/javascript">
@@ -160,16 +173,16 @@
 
         <h:outputScript>
             function drawDot() {
-            let x = JSON.parse('#{dbManager.x}')
-            let y = JSON.parse('#{dbManager.y}')
-            let r = JSON.parse('#{dbManager.r}')
-            let hit = JSON.parse('#{dbManager.hit}')
-
-            drawDots(x, y, r, hit)
+                let x = JSON.parse('#{dbManager.x}')
+                let y = JSON.parse('#{dbManager.y}')
+                let r = JSON.parse('#{dbManager.r}')
+                let hit = JSON.parse('#{dbManager.hit}')
+                drawDots(x, y, r, hit)
             }
             drawDot()
         </h:outputScript>
     </h:panelGroup>
+
 </h:body>
 
 </html>
