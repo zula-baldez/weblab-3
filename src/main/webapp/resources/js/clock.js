@@ -5,6 +5,8 @@ const canvas = document.getElementById('clock-canvas')
 const ctx = canvas.getContext('2d')
 const width = canvas.width
 const height = canvas.height
+
+
 function clock() {
     const date = new Date();
     const hours = ((date.getHours() + 11) % 12 + 1);

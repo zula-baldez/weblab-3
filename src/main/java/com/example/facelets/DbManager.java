@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,8 +59,9 @@ public class DbManager implements Serializable {
 
     public List<Attempt> getAttempts() {
         try (Session session = sessionFactory.openSession()) {
-
-            return session.createQuery(getString).list();
+            List<Attempt> attempts = session.createQuery(getString).list();
+            Collections.reverse(attempts);
+            return attempts;
         }
     }
     public String getX() {

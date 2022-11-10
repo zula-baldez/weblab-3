@@ -1,17 +1,15 @@
 package com.example.facelets;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
-import jakarta.persistence.*;
-
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Singleton;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 
