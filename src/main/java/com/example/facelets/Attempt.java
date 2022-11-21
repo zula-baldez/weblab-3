@@ -3,10 +3,11 @@ package com.example.facelets;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -15,9 +16,11 @@ import java.util.Objects;
 
 @Entity
 @SessionScoped
-@ManagedBean
 public class Attempt implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column
     private int attempt = 0;
     @Column
     private double x;
@@ -35,11 +38,27 @@ public class Attempt implements Serializable {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-
-    public int getId() {
-        return attempt;
+    public Attempt(int attempt, double x, double y, double r, boolean hit, Long workTime, Long startTime) {
+        this.attempt = attempt;
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.hit = hit;
+        this.workTime = workTime;
+        this.startTime = startTime;
     }
 
+    public Attempt() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getAttempt() {
         return attempt;
@@ -103,19 +122,6 @@ public class Attempt implements Serializable {
 
     public void setSimpleDateFormat(SimpleDateFormat simpleDateFormat) {
         this.simpleDateFormat = simpleDateFormat;
-    }
-
-    public void checkHit() {
-
-        long start = System.currentTimeMillis();
-        long start_time_nano = System.nanoTime();
-        if (x >= 0 && y <= r/2 - x && y >= 0) hit = true;
-        else if (x >= 0 && y<=0 && y >= -r && x <= r/2) hit = true;
-        else if (x<=0 && y >= 0 && x*x+y*y <= r*r) hit = true;
-        else hit = false;
-        startTime = (start);
-        workTime = ((System.nanoTime() - start_time_nano));
-
     }
 
     @Override

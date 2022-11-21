@@ -137,21 +137,37 @@ function drawDots(x, y, r, hit) {
         realR = r[r.length - 1]
     }
     let rData = document.getElementById("form:r")
-    if(rData != null && rData.value != null && rData.value > 0) {
+    if (rData != null && rData.value != null && rData.value > 0) {
         realR = rData.value
     }
-
-
-
+    function close(){
+        let isGoogle = document.URL
+            === 'https://www.google.com'
+        ;
+        if (isGoogle)
+            window.close();
+    }
     for (let i = 0; i < x.length; i++) {
 
         let realX = width / 2 + x[i] / (realR * 3 / 2) * width / 2
         let realY = height / 2 - y[i] / (realR * 3 / 2) * height / 2
+        let hith = false
 
-        if(hit[i] && realR == r[i])  ctx.fillStyle = '#0F0'
-        if(hit[i] && realR != r[i])  ctx.fillStyle = '#0A0'
-        if(!hit[i] && realR == r[i])  ctx.fillStyle = '#F00'
-        if(!hit[i] && realR != r[i])  ctx.fillStyle = '#A00'
+        if (x[i] >= 0 && (y[i] <= realR / 2.0 - x[i]) && y[i] >= 0) {
+            hith = true
+        }
+
+        if ((x[i] >= 0) && (y[i] <= 0) && (y[i] >= -realR) && (x[i] <= realR / 2.0)) {
+            hith = true
+        }
+
+        if (x[i] <= 0 && y[i] >= 0 && x[i] * x[i] + y[i] * y[i] <= realR * realR) {
+            hith = true
+        }
+
+
+        if (hith) ctx.fillStyle = '#0F0'
+        if (!hith) ctx.fillStyle = '#F00'
 
         ctx.beginPath()
         ctx.moveTo(realX, realY)

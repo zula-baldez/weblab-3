@@ -31,7 +31,7 @@
 
 
             <p class="variable_name">X</p>
-            <p:inputText type='hidden' value="#{attempt.x}" name='x' id='x'/>
+            <p:inputText type='hidden' value="#{attemptHitter.x}" name='x' id='x'/>
             <div id="xButtons">
                 <h:commandButton name="xButton" type="button" id="button1" class="button"
                                  value="-2" onclick="changeClassToEnabledX(this.id)"/>
@@ -63,13 +63,13 @@
 
             <p class="variable_name">Y</p>
             <p:inputNumber
-                    name="y" id="y" minValue="-3" maxValue="3" decimalSeparator="." decimalPlaces="6"  value="#{attempt.y}"/>
+                    name="y" id="y" minValue="-3" maxValue="3" decimalSeparator="." decimalPlaces="6"  value="#{attemptHitter.y}"/>
 
 
 
             <p class="variable_name">R</p>
 
-            <p:inputText type='hidden' value="#{attempt.r}" name='r' id='r'/>
+            <p:inputText type='hidden' value="#{attemptHitter.r}" name='r' id='r'/>
             <div id="rButtons">
                 <h:commandButton name="rButton" type="button" id="buttonR1" class="button"
                                  value="1" onclick="changeClassToEnabledR(this.id)"/>
@@ -126,9 +126,9 @@
                 </h:column>
             </h:dataTable>
 
-            <p:remoteCommand name="addAttempt" update="table drawDot" action="#{dbManager.addAttemptFromJsParams}"/>
+            <p:remoteCommand name="addAttempt" update="table drawDot" action="#{attemptHitter.addAttemptFromJsParams}"/>
 
-            <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{dbManager.addAttempt}" update = "drawDot form"/>
+            <p:commandButton ajax = "true" id="submit" class="button" value="Send" action="#{attemptHitter.checkHit}" update = "drawDot form"/>
 
             <p:commandButton ajax="false" id="go-start" class="button" value="go start" action="start.xhtml?faces-redirect=true"/>
 
